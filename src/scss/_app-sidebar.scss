@@ -3,7 +3,7 @@
   height: 100%;
   overflow: hidden;
 .lists{
-  height: calc(100% - 50px);
+  height: calc(100% - 66px);
   overflow: auto;
 
   .filtered-lists {
@@ -15,7 +15,10 @@
       list-style: none;
       .list-item {
         padding: 10px;
+        background-color: rgb(241, 241, 241);
+        border-radius: 15px;
         cursor: pointer;
+        transition: color 0.3s, background-color 0.3s;
         .row:first-child {
           display: flex;
           justify-content: space-between;
@@ -26,7 +29,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: rgb(241, 241, 241);
             span,
             i {
               font-weight: 700;
@@ -40,11 +42,58 @@
             span {
               font-size: 1.5rem;
               opacity: 0.7;
+              font-weight: 700;
+            }
+          }
+        }
+      }
+      .selected, :hover{
+        color: $light;
+        &.today{
+          background-color: rgb(0, 0, 255);
+          
+        }
+        &.scheduled{
+          
+          background-color: rgb(255, 0, 0);
+        }
+        &.all{
+          
+          background-color: rgb(63, 63, 63);
+        }
+      }
+  
+      & :not(.selected):not(:hover){
+        &.today{
+          .row:first-child {
+            div {
+               i {
+                color: rgb(0, 0, 255);
+              }
+            }
+          }
+        }
+        &.scheduled{
+          .row:first-child {
+            div {
+               i {
+                color: rgb(255, 0, 0);
+              }
+            }
+          }
+        }
+        &.all{
+          .row:first-child {
+            div {
+              i {
+                color: rgb(63, 63, 63);
+              }
             }
           }
         }
       }
     }
+
   }
   .all-lists {
     margin-top: 20px;
@@ -53,10 +102,16 @@
       position: sticky;
       top: 0;
       background-color: $light;
+      padding: 1rem;
     }
     ul {
       list-style: none;
       .list-item {
+        background-color: rgb(241, 241, 241);
+        border-radius: 10px;
+        margin: 5px;
+        transition: color 0.3s, background-color 0.3s;
+        cursor: pointer;
         .row {
           display: flex;
           font-size: 1.5rem;
@@ -76,6 +131,10 @@
             @extend .icon;
           }
         }
+        &.selected, &:hover {
+          background-color: rgb(167, 167, 167);
+          color: white;
+        }
       }
     }
   }
@@ -85,6 +144,9 @@
     position: absolute;
     width: 100%;
     bottom: 0;
+    padding: 8px;
+    background-color: white;
+    box-shadow: -1px -1px 2px 1px rgba(0, 0, 0, 0.2);
     // bottom: -50px;
     .row {
       display: flex;
@@ -96,6 +158,11 @@
         align-items: center;
         justify-content: center;
         border-radius: 50%;
+        border: 2px solid white;
+        transition: border-color 0.3s;
+        &:hover {
+          border-color: black;
+        }
         img{
           border-radius: inherit;
           width: 100%;
@@ -106,6 +173,10 @@
         padding-left: 10px;
         .name{
           font-weight: 700;
+          cursor: pointer;
+          &:hover{
+            text-decoration: underline;
+          }
         }
         .email{
           opacity: 0.7;
@@ -117,8 +188,39 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: transparent;
+        border: none;
+        font-size: 1.4rem;
+        border-radius: 50%;
+        transition: background-color 0.3s;
+        cursor: pointer;
+         &:hover{
+          background-color: rgb(228, 228, 228);
+
+        }
 
       }
     }
   }
+}
+
+::-webkit-scrollbar{
+  width: 3px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border: none;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(143, 143, 143);
+}
+::-webkit-scrollbar-track-piece {
+  background: rgb(243, 243, 243);
+  border: none;
+  border-radius: 50px;
 }

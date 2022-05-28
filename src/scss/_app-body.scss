@@ -12,10 +12,26 @@
       .quick-actions{
         display: flex;
         align-items: flex-end;
-        gap: 8px;
         button{
-          padding: 8px;
-        }
+          opacity: 0.7;
+            height: 50px;
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border: none;
+            font-size: 1.3rem;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+            cursor: pointer;
+             &:hover{
+               opacity: 1;
+              background-color: rgb(228, 228, 228);
+    
+            }
+    
+          }
       }
     }
   }
@@ -42,12 +58,24 @@
           .task-note{
             opacity: 0.7;
           }
-          .task-sidenote{
+          .task-side-note{
             padding-top: 4px;
             font-size: 0.7rem;
-            opacity: 0.7;
             span{
+              opacity: 0.7;
               margin: auto 5px;
+              cursor: default;
+              transition: opacity 0.3s, text-decoration 0.3s;
+              &:hover{
+                opacity: 1;
+                &:first-of-type{
+                  text-decoration: underline;
+                  cursor: pointer;
+                }
+              }
+              i{
+                padding-right: 3px;
+              }
             }
           }
         }
@@ -59,6 +87,31 @@
             height: 30px;
             width: 30px;
             font-size: 1.2rem;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border: none;
+            border-radius: 50%;
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+             &:hover{
+               opacity: 1;
+               font-weight: 900;
+               transform: scale(1.2);
+               color: white;
+               &.add-subtask{
+                 background-color: green;
+              }
+               &.edit-task{
+                 background-color: blue;
+              }
+               &.delete-task{
+                 background-color: red;
+              }
+    
+            }
           }
         }
       }
