@@ -5,8 +5,8 @@ module.exports = {
   entry: path.join(__dirname, "src", "index"),
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: "/src/index.html",
       title: "To Do Tasks | A Friendly Reminder",
     }),
-  ],
+  ]
 };

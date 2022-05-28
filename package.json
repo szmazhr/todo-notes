@@ -2,7 +2,7 @@
   "name": "todo-notes",
   "version": "1.0.0",
   "description": "A simple To-Do list and Notes app built in HTML, CSS and JavaScript",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "scripts": {
     "open": "webpack server --config webpack.dev.js --open",
     "dev": "webpack server --config webpack.dev.js",
