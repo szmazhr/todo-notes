@@ -12,13 +12,8 @@ function createHome() {
     ["main-content", "main"]
   );
 
-    tasks.forEach(task => {
-      const _task = createTask(task);
-      main.append(_task);
-    });
-    const headerContent = createMainHeader();
-    // const mainContent = createMainContent();
 
+    const headerContent = createMainHeader();
   
   DOM.bulkAppend(container, [header, [headerContent]], [main]);
   return container;

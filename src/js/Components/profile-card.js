@@ -1,7 +1,9 @@
 import DOM from "../Modules/domStuff";
+import { createIconButton } from "./icon-button";
+
 
 function createProfileCard() {
-  const [footer, row, avatar, img, info, name, email, setting_gear] =
+  const [footer, row, avatar, img, info, name, email] =
     DOM.createElementsByClassName(
       ["profile", 'footer'],
       ["row"],
@@ -10,7 +12,6 @@ function createProfileCard() {
       ["info"],
       ["name"],
       ["email"],
-      ["setting-gear", 'button']
     );
 
   DOM.addAttributes(img,
@@ -18,7 +19,8 @@ function createProfileCard() {
     alt: "avatar"});
   DOM.textNode('Shahzar Mazhar', 'span', name);
   DOM.textNode('mohdshahzar.1996@gmail.com', 'span', email);
-  DOM.bsIcon('sliders2', setting_gear);
+  const setting_gear = createIconButton('sliders2', 'setting-gear')
+  footer.setAttribute('data-id', 'profile');
 
   DOM.bulkAppend(footer, [row, [avatar, [img]], [info, [name], [email]], [setting_gear]]);
   

@@ -32,7 +32,9 @@ function createMainHeader(){
   )
   DOM.textNode('Default', 'h2', title);
   buttons.forEach(btn => {
-    quick_actions.append(createIconButton(btn.icon, btn.name, btn.name));
+    const _btn = createIconButton(btn.icon, btn.name, btn.name)
+    _btn.setAttribute('data-id', `btn-${btn.name}`)
+    quick_actions.append(_btn);
   })
   DOM.bulkAppend(row, [title], [quick_actions]);
   return row;

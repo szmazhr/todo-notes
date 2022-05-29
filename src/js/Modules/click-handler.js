@@ -6,14 +6,19 @@
  */
 
 import eventHandler from "/src/js/Modules/event-handler";
-(() => {
-  const elements = document.querySelectorAll("[data-onClick]");
-  elements.forEach((element) => addClickListener(element));
-})();
+// (() => {
+//   const elements = document.querySelectorAll("[data-onClick]");
+//   elements.forEach((element) => addClickListener(element));
+// })();
 
-function addClickListener(element) {
+function addClickListener(element, data) {
   element.addEventListener("click", (event) => {
-    eventHandler.publish(element.dataset.onclick, event);
+    const parent = element.closest("[data-id]");
+    const id = parent.dataset.id;
+    eventHandler.publish(data, id);
+
+    //temp added
+    console.log({element, parent , id, eventName: data});
   });
 }
 

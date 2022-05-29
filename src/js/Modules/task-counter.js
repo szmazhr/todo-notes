@@ -1,6 +1,6 @@
 import eventHandler from "./event-handler";
 import DOM from "./domStuff";
-import { getList, lists, tasks } from "./data-management";
+import { lists, getList } from "./data-management";
 
 eventHandler.subscribe("count", () => {
   const counters = DOM.selectAll(".count");
@@ -8,17 +8,24 @@ eventHandler.subscribe("count", () => {
   counters.forEach((counter) => {
     const parent = counter.closest("[data-id]");
     const id = parent.getAttribute("data-id");
-    if (id === "all") {
+    const tasks = (() => {
+      const _tasks = [];
+      lists.forEach((list) => {
+      _tasks.push(...list.getTasks());
+    });
+    return _tasks
+    })();
+    if (id === "l-all") {
       const _d = DOM.select("span", counter);
       _d.textContent = tasks.filter(task => !task.completed).length;
-    }else if(id === 'scheduled'){
+    }else if(id === 'l-scheduled'){
       const _d = DOM.select("span", counter);
       _d.textContent = tasks.filter(task => !task.completed && task.dueDate).length;
-      console.log(id);
     }
     
-    if (typeof +id === "number") {
-      const list = getList(id);
+    if (id.match(/^(l-)[0-9]+$/)) {
+      const _id = id.split("-")[1];
+      const list = getList(+_id);
       if (list) {
         const _d = DOM.select("span", counter);
         _d.textContent = list.getTasks().filter(task => !task.completed).length;

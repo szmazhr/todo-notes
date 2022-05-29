@@ -1,52 +1,33 @@
+import { addClickListener } from "../Modules/click-handler";
 import DOM from "../Modules/domStuff";
+import { excerpt } from "../Modules/utils";
 import { createIconButton } from "./icon-button";
-
-
-const subtasks = [
-  {
-    id: 1,
-    title: "Task 1",
-    description: "This is a task",
-    parent: "t-1",
-    dueDate: "2020-01-01",
-  },
-  {
-    id: 2,
-    title: "Task 2",
-    description: "This is a task",
-    parent: "t-1",
-    dueDate: "2020-01-01",
-  },
-  {
-    id: 3,
-    title: "Task 3",
-    description: "This is a task",
-    parent: "t-3",
-    dueDate: "2020-01-01",
-  },
-];
-
 
 const buttons = [
   {
     id: 1,
-    name: 'add-subtask',
-    icon: 'plus-lg',
+    name: "add-subtask",
+    icon: "plus-lg",
   },
   {
     id: 2,
-    name: 'edit-task',
-    icon: 'pencil',
+    name: "edit-task",
+    icon: "pencil",
   },
   {
     id: 3,
-    name: 'delete-task',
-    icon: 'trash',
+    name: "delete-task",
+    icon: "trash",
   },
-]
+  {
+    id: 4,
+    name: "menu",
+    icon: "three-dots-vertical",
+  },
+];
 
 function createTask(task) {
-  const _isSubtask = (task.parentId.match(/^[t-]/i)) ? true : false;
+  const _isSubtask = task.parentId.match(/^[t-]/i) ? true : false;
   const [
     task_card,
     task_body,
@@ -59,10 +40,10 @@ function createTask(task) {
     task_side_note,
     task_action,
   ] = DOM.createElementsByClassName(
-    [`${_isSubtask ? 'subtask-card' : 'task-card'}`],
+    [`${_isSubtask ? "subtask-card" : "task-card"}`],
     ["task-body"],
     ["task-status"],
-    ["checkbox", 'input'],
+    ["checkbox", "input"],
     ["label"],
     ["task-info"],
     ["task-name"],
@@ -72,42 +53,52 @@ function createTask(task) {
   );
 
   DOM.addAttributes(checkbox, {
-    type: 'checkbox',
+    type: "checkbox",
     id: task.id,
-  })
-
+  });
+  const parent = task.getParent();
   checkbox.checked = task.completed;
-  label.setAttribute('for', task.id);
+  label.setAttribute("for", task.id);
 
-  DOM.textNode(task.title, 'span', task_name);
-  DOM.textNode(task.description, 'span', task_note);
-  DOM.textNode(task.parentId, 'span', task_side_note);
+  const icon = DOM.bsIcon(parent.icon);
 
-  if(task.dueDate) {  
-    DOM.bsIcon('dot', task_side_note);
-    DOM.textNode(task.dueDate, 'span', task_side_note);
+  DOM.textNode(task.title, "span", task_name);
+  DOM.textNode(excerpt(task.description, 60), "p", task_note);
+  DOM.textNode(parent.title, "span", task_side_note, icon);
+
+  if (task.dueDate) {
+    DOM.bsIcon("dot", task_side_note);
+    DOM.textNode(task.dueDate, "span", task_side_note);
   }
 
-  buttons.forEach(btn => {
-    if(_isSubtask && btn.name == 'add-subtask') {return;}
-    task_action.append(createIconButton(btn.icon, btn.name, btn.name));
-  })
+  if (!_isSubtask) {
+    const _count = task.getSubtasks().length;
+    const _text = _count > 1 ? `subtasks (${_count})` : `subtask (${_count})`;
+    DOM.bsIcon("dot", task_side_note);
+    const _a = DOM.textNode(_text, "a", task_side_note);
+    _a.setAttribute("href", `#subtasks`);
+    if(_count > 0) addClickListener(_a, "subtask-list");
+  }
 
-  DOM.bulkAppend(
-    task_card,
-    [task_body, [task_status, [checkbox], [label]], [task_info, [task_name], [task_note], [task_side_note]],
-    [task_action]]
-  );
-  
-    if(!_isSubtask) {
-      const subtasks = task.getSubtasks();
-      subtasks.forEach(task => {;
-        const _subtask = createTask(task);
-        task_card.append(_subtask);
-      });
+  buttons.forEach((btn) => {
+    if (_isSubtask && btn.name == "add-subtask") {
+      return;
     }
+    task_action.append(createIconButton(btn.icon, btn.name, btn.name));
+  });
+
+  DOM.bulkAppend(task_card, [
+    task_body,
+    [task_status, [checkbox], [label]],
+    [task_info, [task_name], [task_note], [task_side_note]],
+    [task_action],
+  ]);
+
+  const taskId = !_isSubtask ? `t-${task.id}` : `s-${task.id}`;
+  task_card.setAttribute("data-id", taskId);
+  addClickListener(task_note, "toggleTask");
 
   return task_card;
 }
 
-export { createTask }
+export { createTask };

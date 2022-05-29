@@ -4,7 +4,7 @@ class List {
   constructor(item) {
     this.id = item.id;
     this.title = item.title;
-    this.icon = item.icon;
+    this.icon = item.icon || 'list-ul';
     this.color = item.color;
   }
 }
@@ -43,23 +43,30 @@ const getTasks = function () {
 };
 
 const getList = function (id) {
-  const listId = id || this.parentId.replace("l-", "");
-  return lists.find((list) => list.id === +listId);
+  return lists.find((list) => list.id === +id);
 };
 
-const getTask = function () {
-  const taskId = this.id.replace("t-", "");
-  return tasks.find((task) => task.id === +taskId);
+const getTask = function (id) {
+  const _tasks = (id.split("-")[0] === 's') ? subtasks : tasks ;
+  const _id = id.match(/^([ts]-)[0-9]+$/i) ? id.split("-")[1] : id;
+  return _tasks.find((task) => task.id === +_id);
 };
+
+const getParent = function () {
+  const _id = this.parentId.split("-")[1];
+  const parent = (this.parentId.split("-")[0] === 'l') ? lists : tasks;
+  return parent.find((x) => x.id === +_id);
+}
+
 lists.forEach((list) => {
   Object.assign(list, { getTasks });
 });
 
 tasks.forEach((task) => {
-  Object.assign(task, { getSubtasks, getList });
+  Object.assign(task, { getSubtasks, getParent });
 });
 subtasks.forEach((subtask) => {
-  Object.assign(subtask, { getTask });
+  Object.assign(subtask, { getParent });
 });
 
-export { lists, tasks, subtasks, getList };
+export { lists, subtasks, getList, getTask};

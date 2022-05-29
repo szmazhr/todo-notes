@@ -1,9 +1,10 @@
+import { addClickListener } from "../Modules/click-handler";
 import DOM from "../Modules/domStuff"
 
-function createIconButton(iconName, className, onClick){
+function createIconButton(iconName, className){
   const btn = DOM.createElementsByClassName([className, 'button']);
   DOM.bsIcon(iconName, btn);
-  if(onClick) btn.setAttribute('data-onClick', onClick);
+  addClickListener(btn, className);
   return btn;
 }
 

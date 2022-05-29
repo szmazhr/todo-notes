@@ -1,3 +1,4 @@
+import { addClickListener } from "../Modules/click-handler";
 import { lists } from "../Modules/data-management";
 import DOM from "../Modules/domStuff";
 
@@ -30,11 +31,15 @@ function createListItem(item) {
     ["count"],
     ["title"]
   );
-  li.setAttribute("data-id", item.id);
+  li.setAttribute("data-id", `l-${item.id}`);
   DOM.bsIcon(item.icon, icon);
+  if(item.color) icon.style.color = item.color;
   DOM.textNode(item.title, "span", title);
   DOM.textNode(0, "span", count);
   DOM.bulkAppend(li, [row, [icon], [title], [count]]);
+
+  addClickListener(li, 'view-list')
+
   return li;
 }
 

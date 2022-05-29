@@ -13,10 +13,10 @@ class Clock {
     let month = months[date.getMonth()];
     let hr12 = "AM";
 
-    if (hours > 12) {
-      hr12 = "PM";
-      hours -= 12;
-    }
+    // if (hours > 12) {
+    //   hr12 = "PM";
+    //   hours -= 12;
+    // }
 
     if (hours < 10) hours = "0" + hours;
     if (mins < 10) mins = "0" + mins;

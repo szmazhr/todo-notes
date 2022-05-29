@@ -61,17 +61,15 @@ const DOM = {
       }
     });
   },
-  // setTextContent(...pairsOfElementText){
-  //   pairsOfElementText.forEach((item) => {
-  //     this.textNode(item[0], item[1]);
-  //     item[0].textContent = item[1];
-  //   });
-  // },
-  textNode(text, elementName, parent) {
+
+  textNode(text, elementName, parent, sibling, position = 'afterbegin') {
     const _element = this.createElements(elementName);
     _element.textContent = text;
+    if(sibling){
+      _element.insertAdjacentElement(position, sibling);
+    }
     if(parent) parent.appendChild(_element);
-    if(!parent) return _element;
+    return _element;
   },
 
   bsIcon(iconName, parent) {
