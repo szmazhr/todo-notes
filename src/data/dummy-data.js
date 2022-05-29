@@ -1,5 +1,11 @@
 const lists = [
   {
+    id: 0,
+    title: "All Tasks",
+    icon: "inbox",
+    color: "gray"
+  },
+  {
     id: 1,
     title: "Default",
     icon: "",
@@ -133,15 +139,17 @@ const subtasks = [
 ];
 
 const settings = {
-  lists: {
-    id: 0,
+  listId: 0,
+  taskId: 0,
+  subtaskId: 0,
+  clock:{
+    enabled: true,
+    format: 'M D h:m:s',
+    position: "top-center",
   },
-  tasks: {
-    id: 0,
-  },
-  subtasksIdss: {
-    id: 0,
-  },
+  filter:{
+    basic: 'all',
+  }
 };
 
 export { lists, tasks, subtasks, settings };

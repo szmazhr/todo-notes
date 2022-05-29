@@ -12,12 +12,6 @@ class Clock {
     let day = date.getDate();
     let month = months[date.getMonth()];
     let hr12 = "AM";
-
-    // if (hours > 12) {
-    //   hr12 = "PM";
-    //   hours -= 12;
-    // }
-
     if (hours < 10) hours = "0" + hours;
     if (mins < 10) mins = "0" + mins;
     if (secs < 10) secs = "0" + secs;
@@ -44,4 +38,5 @@ class Clock {
     return "Started";
   }
 }
-export { Clock };
+
+export default Clock;

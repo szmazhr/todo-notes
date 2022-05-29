@@ -10,11 +10,14 @@ import './js/Modules/utils';
 import './js/Modules/subtasks';
 import './js/Modules/toggleTask';
 import './js/Modules/active-list';
+import './js/Components/clock';
 // import { createListItem } from './js/Components/std-list-item';
 
 
 
-
+/*
+?------pinned tasks---------
+*/
 
 
 eventHandler.publish('initialize');

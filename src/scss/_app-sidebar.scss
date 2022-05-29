@@ -112,7 +112,7 @@
         background-color: rgb(241, 241, 241);
         border-radius: 10px;
         margin: 5px auto;
-        transition: color 0.3s, background-color 0.3s;
+        transition: text-shadow 0.3s, background-color 0.3s;
         cursor: pointer;
         .row {
           display: flex;
@@ -134,8 +134,8 @@
           }
         }
         &.selected, &:hover {
-          background-color: rgb(167, 167, 167);
-          color: white;
+          background-color: rgb(216, 216, 216);
+          text-shadow: 1px 1px 1px rgba(0, 0, 0, .7);
         }
       }
     }

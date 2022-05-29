@@ -9,13 +9,16 @@
   .app-header{
     height: 20px;
     width: 100%;
-    background-color: $primary;
+    // background-color: $primary;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding: 0 10px;
     top: -20px;
     color: $light;
     position: absolute;
+    color: black;
+    background: linear-gradient(90deg, hwb(300 19% 0% / 0.548), #ffbf6f 70%);
+    // background: linear-gradient(90deg, hwb(300 19% 0% / 0.548), #ffbf6f 35%, #ffbf6f 65%, #7cff809d);
   }
   .content{
     display: grid;
@@ -28,6 +31,7 @@
     @extend .app-header;
     bottom: -20;
     top: initial;
+    background: linear-gradient(270deg, #7cff809d, #ffbf6f 70%);
   }
 }
 

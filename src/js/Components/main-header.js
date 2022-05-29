@@ -30,7 +30,7 @@ function createMainHeader(){
     ["title"],
     ["quick-actions"]
   )
-  DOM.textNode('Default', 'h2', title);
+  DOM.textNode('{Title}', 'h2', title);
   buttons.forEach(btn => {
     const _btn = createIconButton(btn.icon, btn.name, btn.name)
     _btn.setAttribute('data-id', `btn-${btn.name}`)

@@ -1,4 +1,4 @@
-import { lists, tasks, subtasks } from "/src/data/dummy-data.js";
+import { lists, tasks, subtasks, settings } from "/src/data/dummy-data.js";
 
 class List {
   constructor(item) {
@@ -69,4 +69,5 @@ subtasks.forEach((subtask) => {
   Object.assign(subtask, { getParent });
 });
 
-export { lists, subtasks, getList, getTask};
+
+export { lists, tasks, subtasks, getList, getTask, settings};

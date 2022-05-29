@@ -15,21 +15,22 @@ eventHandler.subscribe("count", () => {
     });
     return _tasks
     })();
-    if (id === "l-all") {
-      const _d = DOM.select("span", counter);
-      _d.textContent = tasks.filter(task => !task.completed).length;
-    }else if(id === 'l-scheduled'){
-      const _d = DOM.select("span", counter);
-      _d.textContent = tasks.filter(task => !task.completed && task.dueDate).length;
+    const _display = DOM.select("span", counter);
+
+    let output = 0;
+    switch(id){
+      case 'l-scheduled': output = tasks.filter(task => !task.completed && task.dueDate).length; break;
+      case 'l-all':
+      case 'l-0': output = tasks.filter(task => !task.completed).length; break;
     }
-    
-    if (id.match(/^(l-)[0-9]+$/)) {
+
+    if (id.match(/^(l-)[1-9][0-9]*$/)) {
       const _id = id.split("-")[1];
       const list = getList(+_id);
       if (list) {
-        const _d = DOM.select("span", counter);
-        _d.textContent = list.getTasks().filter(task => !task.completed).length;
+        output = list.getTasks().filter(task => !task.completed).length;
       }
     }
+    _display.textContent = output;
   });
 });
