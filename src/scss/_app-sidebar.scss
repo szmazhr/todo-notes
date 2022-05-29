@@ -2,16 +2,18 @@
   position: relative;
   height: 100%;
   overflow: hidden;
+  
 .lists{
   height: calc(100% - 66px);
   overflow: auto;
+  padding: 0 0.5rem;
 
   .filtered-lists {
+    padding: 0.5rem 0;
     ul {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
-      padding: 0.5rem;
       list-style: none;
       .list-item {
         padding: 10px;
@@ -96,20 +98,20 @@
 
   }
   .all-lists {
-    margin-top: 20px;
+    margin-top: 5px;
     h3 {
       font-size: 2rem;
       position: sticky;
       top: 0;
       background-color: $light;
-      padding: 1rem;
+      padding: 0.8rem;
     }
     ul {
       list-style: none;
       .list-item {
         background-color: rgb(241, 241, 241);
         border-radius: 10px;
-        margin: 5px;
+        margin: 5px auto;
         transition: color 0.3s, background-color 0.3s;
         cursor: pointer;
         .row {
@@ -179,6 +181,7 @@
           }
         }
         .email{
+          font-size: 0.8rem;
           opacity: 0.7;
         }
       }

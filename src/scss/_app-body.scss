@@ -44,14 +44,15 @@
         align-items: center;
         padding: 5px;
         .task-status{
-          height: 60px;
-          width: 60px;
-          align-items: center;
-          justify-content: center;
+          height: 40px;
+          width: 40px;
           display: flex;
+          justify-content: flex-start;
+          align-items: center;
         }
         .task-info{
           flex: 1;
+          padding-left: 10px;
           .task-name{
             font-size: 1.3rem;
           }
