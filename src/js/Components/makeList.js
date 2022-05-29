@@ -49,6 +49,8 @@ const primaryList = ((items) => {
     const li = createListItem(item);
     const title = DOM.select(".title", li);
     const title_wrapper = DOM.createElementsByClassName(["row"]);
+    const icon = DOM.select('.icon', li);
+    icon.style.removeProperty('color');
     li.classList.add(item.title.toLowerCase());
     title_wrapper.appendChild(title);
     li.appendChild(title_wrapper);
