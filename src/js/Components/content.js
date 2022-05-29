@@ -4,11 +4,13 @@ import { createHome } from "./home";
 import { createSidebar } from "./sidebar";
 
 
-eventHandler.subscribe('ready', () => {
+eventHandler.subscribe('initialized', () => {
   const content = DOM.select('.content');
   const sidebar = createSidebar();
   const home = createHome();
 
 
   DOM.bulkAppend(content, [sidebar], [home]);
+
+  eventHandler.publish('count');
 });

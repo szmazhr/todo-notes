@@ -4,19 +4,19 @@ import DOM from "../Modules/domStuff";
 const textAndClass = [
   {
     id: "today",
-    name: "Today",
+    title: "Today",
     icon: "calendar-event",
     color: "blue",
   },
   {
     id: "scheduled",
-    name: "Scheduled",
+    title: "Scheduled",
     icon: "calendar3",
     color: "red",
   },
   {
     id: "all",
-    name: "All",
+    title: "All",
     icon: "inbox",
     color: "gray",
   },
@@ -32,7 +32,7 @@ function createListItem(item) {
   );
   li.setAttribute("data-id", item.id);
   DOM.bsIcon(item.icon, icon);
-  DOM.textNode(item.name, "span", title);
+  DOM.textNode(item.title, "span", title);
   DOM.textNode(0, "span", count);
   DOM.bulkAppend(li, [row, [icon], [title], [count]]);
   return li;
@@ -44,7 +44,7 @@ const primaryList = ((items) => {
     const li = createListItem(item);
     const title = DOM.select(".title", li);
     const title_wrapper = DOM.createElementsByClassName(["row"]);
-    li.classList.add(item.name.toLowerCase());
+    li.classList.add(item.title.toLowerCase());
     title_wrapper.appendChild(title);
     li.appendChild(title_wrapper);
     _list.push(li);
