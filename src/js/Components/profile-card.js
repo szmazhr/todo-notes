@@ -10,7 +10,7 @@ function createProfileCard() {
       ["info"],
       ["name"],
       ["email"],
-      ["setting-gear"]
+      ["setting-gear", 'button']
     );
 
   DOM.addAttributes(img,
