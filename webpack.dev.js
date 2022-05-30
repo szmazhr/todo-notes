@@ -9,7 +9,7 @@ module.exports = merge(common, {
   },
   devServer: {
     port: 8080,
-    hot: false,
+    // hot: false,
   },
   module: {
     rules: [

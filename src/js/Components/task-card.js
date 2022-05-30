@@ -28,6 +28,8 @@ const buttons = [
 
 function createTask(task) {
   const _isSubtask = task.parentId.match(/^[t-]/i) ? true : false;
+
+  //creating required elements
   const [
     task_card,
     task_body,
@@ -52,38 +54,62 @@ function createTask(task) {
     ["task-action"]
   );
 
+  //defining task / subtask id
+  const _id = !_isSubtask ? `t-${task.id}` : `s-${task.id}`;
+
+  //fetching parent
+  const parent = task.getParent();
+
+  //setting status checkbox and label attributes
+  label.setAttribute("for", _id);
   DOM.addAttributes(checkbox, {
     type: "checkbox",
-    id: task.id,
+    id: _id,
   });
-  const parent = task.getParent();
+
+  //status completed/incomplete
   checkbox.checked = task.completed;
-  label.setAttribute("for", task.id);
 
-  const icon = DOM.bsIcon(parent.icon);
+  //adding title under the span element
+  DOM.textNode(task.title, `${!_isSubtask ? "h3" : "h4"}`, task_name);
 
-  DOM.textNode(task.title, "span", task_name);
-  DOM.textNode(excerpt(task.description, 60), "p", task_note);
-  DOM.textNode(parent.title, "span", task_side_note, icon);
+  //adding description excerpt under the p element
+  let p = DOM.textNode(excerpt(task.description, 60), "p", task_note);
+
+  if (!_isSubtask) {
+    //creating icon element for list icon in main task
+    const icon = DOM.bsIcon(parent.icon);
+
+    //adding list name including it icon
+    DOM.textNode(parent.title, "span", task_side_note, icon);
+
+    //dot after that
+    DOM.bsIcon("dot", task_side_note);
+  }
 
   if (task.dueDate) {
-    DOM.bsIcon("dot", task_side_note);
+    //if task had dueDate add it
     DOM.textNode(task.dueDate, "span", task_side_note);
+
+    if (!_isSubtask) {
+      //dot after that for main task
+      DOM.bsIcon("dot", task_side_note);
+    }
   }
 
   if (!_isSubtask) {
+    // if task is main task, add link to toggle subtask
+    //subtasks counter
     const _count = task.getSubtasks().length;
+    //creating text according to count
     const _text = _count > 1 ? `subtasks (${_count})` : `subtask (${_count})`;
-    DOM.bsIcon("dot", task_side_note);
     const _a = DOM.textNode(_text, "a", task_side_note);
     _a.setAttribute("href", `#subtasks`);
-    if(_count > 0) addClickListener(_a, "subtask-list");
+    if (_count > 0) addClickListener(_a, "subtask-list");
   }
 
   buttons.forEach((btn) => {
-    if (_isSubtask && btn.name == "add-subtask") {
-      return;
-    }
+    if (_isSubtask && btn.name == "add-subtask") return;
     task_action.append(createIconButton(btn.icon, btn.name, btn.name));
   });
 
@@ -96,7 +122,7 @@ function createTask(task) {
 
   const taskId = !_isSubtask ? `t-${task.id}` : `s-${task.id}`;
   task_card.setAttribute("data-id", taskId);
-  addClickListener(task_note, "toggleTask");
+  addClickListener(p, "toggleTask");
 
   return task_card;
 }

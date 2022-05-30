@@ -72,10 +72,32 @@ const DOM = {
     return _element;
   },
 
+  createInput(type, name, id, placeholder, parentClass, sibling, position = 'afterbegin') {
+    const _element = this.createElements('input');
+    const _parent = this.createElementsByClassName([`form-control ${parentClass}`]);
+    const _label = this.createElements('label');
+
+    this.addAttributes(_element, {
+      type,
+      name,
+      placeholder,
+      id,
+    });
+
+    this.addAttributes(_label, {for: id});
+     _parent.append(_element, _label);
+
+    if(sibling){
+      _parent.insertAdjacentElement(position, sibling);
+    }
+    return _parent;
+  },
+
   bsIcon(iconName, parent) {
     const _element = this.createElements('i');
     _element.className = `bi bi-${iconName}`;
     return (parent) ? parent.appendChild(_element) : _element;
   }
 };
+
 export default DOM;

@@ -11,6 +11,8 @@ import './js/Modules/subtasks';
 import './js/Modules/toggleTask';
 import './js/Modules/active-list';
 import './js/Components/clock';
+import './js/Components/pop-up';
+import './js/Modules/forms-management';
 // import { createListItem } from './js/Components/std-list-item';
 
 

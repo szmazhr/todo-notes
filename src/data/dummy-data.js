@@ -24,41 +24,12 @@ const lists = [
     color: "#53a1b8",
   },
   {
-    id: 4,
-    title: "List 3",
-    icon: "",
-    color: "green",
-  },
-  {
-    id: 5,
-    title: "List 4",
-    icon: "",
-    color: "",
-  },
-  {
-    id: 6,
-    title: "List 5",
-    icon: "",
-    color: "",
-  },
-  {
-    id: 7,
-    title: "List 6",
-    icon: "",
-    color: "",
-  },
-  {
     id: 8,
     title: "List 7",
     icon: "",
     color: "",
   },
-  {
-    id: 9,
-    title: "List 8",
-    icon: "",
-    color: "",
-  },
+
 ];
 
 const tasks = [

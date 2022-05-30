@@ -1,0 +1,118 @@
+.list-form{
+padding: 5px;
+
+
+.form-control{
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  background-color: rgb(241, 241, 241);
+  margin: 10px;
+  border-radius: 10px;
+  padding: 10px;
+  .icon-wrapper{
+    background-color: blue;
+    font-size: 4rem;
+    height: 90px;
+    width: 90px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    color: #fff;
+    margin: 10px;
+  }
+  &.name-field{
+    flex-direction: column;
+    input{
+      width: 100%;
+      padding: 5px;
+      border-radius: 10px;
+      padding: 10px;
+      border: none;
+      background-color: rgb(231, 231, 231);
+      font-size: 1.2rem;
+      text-align: center;
+      font-weight: bold;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      outline: none;
+      &:hover{
+        box-shadow: 0 0 4px black;
+      }
+      &:focus{
+        background-color: rgb(211, 211, 211);
+      }
+    }
+  }
+}
+.color-gallery{
+  flex-direction: row !important;
+  gap: 20px;
+
+  [type=color]{
+    display: none;
+  }
+
+  .color-display{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 4px solid rgb(241, 241, 241);
+    transition: box-shadow 0.3s;
+    cursor: pointer;
+    &.color-red{
+      background-color: red;
+    }
+    &.selected,
+    &:hover{
+      box-shadow: 0 0 4px black;
+    }
+  }
+
+}
+.icon-gallery{
+  gap: 20px;
+
+  input{
+    display: none;
+  }
+  .icon-display{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    background-color: rgb(231, 231, 231);
+    font-size: 1.5rem;
+    border-radius: 50px;
+    border: 4px solid rgb(241, 241, 241);
+    transition: box-shadow 0.3s;
+    cursor: pointer;
+    &:hover, &.selected{
+      box-shadow: 0 0 4px black;
+    }
+  }
+}
+.delete-list{
+  padding: 0;
+  position: absolute;
+  bottom: 5px;
+  width: 95%;
+  button{
+    border: none;
+    border-radius: inherit;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 0.4em;
+    width: 100%;
+    background-color: red;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    &:hover{
+      background-color: rgb(197, 6, 6);
+
+    }
+  }
+}
+}

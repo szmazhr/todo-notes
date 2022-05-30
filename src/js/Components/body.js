@@ -11,8 +11,16 @@ eventHandler.subscribe('initialize', () => {
   const [titleHeader, app, content] = DOM.createElementsByClassName(['title-header', 'header'], ['app'], ['content']);
   const header = createStatusBar('app-header');
   const footer = createStatusBar('app-footer');
+  
+  app.setAttribute("data-id", "app");
   DOM.textNode(title, 'h1', titleHeader);
   container.innerHTML = '';
   DOM.bulkAppend(container, [titleHeader], [app, [header], [content], [footer]]);
+
+  
+  
+  //temp
+  
   eventHandler.publish('initialized');
+
 })

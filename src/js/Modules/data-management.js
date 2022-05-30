@@ -70,4 +70,4 @@ subtasks.forEach((subtask) => {
 });
 
 
-export { lists, tasks, subtasks, getList, getTask, settings};
+export { List, lists, tasks, subtasks, getList, getTask, settings};

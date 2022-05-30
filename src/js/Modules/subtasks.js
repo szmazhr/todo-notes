@@ -4,10 +4,13 @@ import DOM from "./domStuff";
 import eventHandler from "./event-handler";
 
 
-eventHandler.subscribe("subtask-list", (id) => {
-  const parent = DOM.select(`[data-id="${id}"]`);
+eventHandler.subscribe("subtask-list", event => {
+  const parent = event.target.closest(`[data-id]`);
   const subtasks = DOM.select(".subtasks", parent);
+  const subtasksAll = DOM.selectAll('.subtasks');
+  const id = parent.dataset.id;
   const task = getTask(id)
+
   if (!subtasks) {
     const subtasks = task.getSubtasks();
     if (subtasks.length) {
@@ -22,10 +25,14 @@ eventHandler.subscribe("subtask-list", (id) => {
         _subtasks.classList.add("show");
       }, 0);
     }
-  }else{
-    subtasks.classList.remove("show");
-    setTimeout(() => {
-      parent.removeChild(subtasks);
-    }, 300);
-  }
+  };
+    //collapse all subtask
+    if(subtasksAll){
+      subtasksAll.forEach(s => {
+        s.classList.remove("show");
+        setTimeout(() => {
+          s.remove();
+        }, 300);
+      });
+    };
 })

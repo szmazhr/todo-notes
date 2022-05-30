@@ -3,9 +3,10 @@ import DOM from "./domStuff";
 import eventHandler from "./event-handler";
 import { excerpt } from "./utils";
 
-eventHandler.subscribe("toggleTask", (id) => {
-  const parent = DOM.select(`[data-id="${id}"]`);
-  const _element = DOM.select(".task-note p", parent);
+eventHandler.subscribe("toggleTask", (event) => {
+  const _element = event.currentTarget;
+  const parent = _element.closest("[data-id]");
+  const id = parent.dataset.id;
   const task = getTask(id);
   const allShowed = DOM.selectAll(".task-note p.show");
   _element.classList.toggle("show");

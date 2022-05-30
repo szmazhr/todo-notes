@@ -1,175 +1,201 @@
-.body{
+.body {
   padding: 10px;
   padding-right: 5px;
   height: 100%;
   overflow: hidden;
-  header{
-    .row{
+  header {
+    .row {
       display: flex;
       padding: 10px;
-      .title{
+      .title {
         font-size: 2.5rem;
         opacity: 0.7;
         flex: 1;
       }
-      .quick-actions{
+      .quick-actions {
         display: flex;
         align-items: flex-end;
-        button{
+        button {
           opacity: 0.7;
-            height: 50px;
-            width: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: transparent;
-            border: none;
-            font-size: 1.3rem;
-            border-radius: 50%;
-            transition: background-color 0.3s;
-            cursor: pointer;
-             &:hover{
-               opacity: 1;
-              background-color: rgb(228, 228, 228);
-    
+          height: 50px;
+          width: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: transparent;
+          border: none;
+          font-size: 1.3rem;
+          border-radius: 50%;
+          transition: background-color 0.3s, color 0.3s;
+          cursor: pointer;
+          &:hover {
+            opacity: 1;
+            background-color: rgb(228, 228, 228);
+            &.delete-list {
+              color: white;
+              background-color: red;
             }
-    
           }
+        }
       }
     }
   }
-  main{
+  main {
     height: calc(100% - 92px);
-  overflow: auto;
-  border-top: 1px solid rgb(216, 216, 216);
-    > .task-card{
+    overflow: auto;
+    border-top: 1px solid rgb(216, 216, 216);
+    font-size: 1rem;
+    > .task-card {
       margin: 5px;
       border-radius: 10px;
     }
-    .task-card{
+    .task-card {
       padding: 10px;
       background-color: rgb(241, 241, 241);
-      .task-body{
+      .task-body {
         display: flex;
         align-items: center;
         padding: 5px;
-        .task-status{
-          height: 40px;
-          width: 40px;
+        .task-status {
+          height: 20px;
+          width: 20px;
           display: flex;
           justify-content: flex-start;
           align-items: center;
+          opacity: 0;
+          transition: opacity 0.3s ease-in-out;
         }
-        .task-info{
+        .task-info {
           flex: 1;
           padding-left: 10px;
-          .task-name{
-            font-size: 1.3rem;
+          .task-name {
+            font-size: 1.3em;
             font-weight: 700;
           }
-          .task-note{
+          .task-note {
             opacity: 0.7;
             transition: opacity 0.3s;
-            p{
+            p {
               transition: height 0.3s ease-in-out;
-              height: 1.2rem;
+              height: 1.2em;
               overflow: hidden;
-              &.show{
-                height: 8rem;
+              &.show {
+                height: 8em;
                 overflow: auto;
               }
             }
-            &:hover{
+            &:hover {
               opacity: 1;
             }
           }
-          .task-side-note{
+          .task-side-note {
             padding-top: 4px;
-            font-size: 0.8rem;
-            span, a{
+            font-size: 0.8em;
+            span,
+            a {
               opacity: 0.7;
               margin: auto 5px;
               cursor: default;
               transition: opacity 0.3s, text-decoration 0.3s;
               color: inherit;
               text-decoration: none;
-              &:hover{
+              &:hover {
                 opacity: 1;
                 text-decoration: underline;
                 cursor: pointer;
-                &:last-of-type:not(a){
+                &:last-of-type:not(a) {
                   text-decoration: none;
                   cursor: default;
                 }
               }
-              i{
+              i {
                 padding-right: 3px;
               }
             }
           }
         }
-        .task-action{
+        .task-action {
           display: flex;
           gap: 10px;
           padding: 10px;
-          button{
+          button {
             height: 30px;
             width: 30px;
-            font-size: 1.2rem;
-            opacity: 0;
+            font-size: 1.2em;
+            // opacity: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: transparent;
             border: none;
             border-radius: 50%;
-            transition: background-color 0.3s, transform 0.3s, opacity 0.3s;
             transition-timing-function: ease;
             z-index: 2;
-            &:nth-last-child(4){
+            &:nth-last-child(4) {
+              transition: background-color 0.3s, transform 0.3s 0.2s, opacity 0.3s;
               transform: translateX(calc(130% * 3)) scale(0);
             }
-            &:nth-last-child(3){
+            &:nth-last-child(3) {
+              transition: background-color 0.3s, transform 0.3s 0.4s, opacity 0.3s;
               transform: translateX(calc(130% * 2)) scale(0);
             }
-            &:nth-last-child(2){
+            &:nth-last-child(2) {
+              transition: background-color 0.3s, transform 0.3s 0.6s, opacity 0.3s;
               transform: translateX(calc(130% * 1)) scale(0);
             }
-            &:nth-last-child(1){
-              z-index: 1;
-              opacity: 1;
+            &:nth-last-child(1) {
+              transform: scale(1); 
+              z-index: 0;
+              transition: transform 0.3s 0.6s, opacity 0.3s 0.6s;
             }
             cursor: pointer;
-             &:hover{
-               opacity: 1;
-               font-weight: 900;
-               transform: scale(1.2);
-               color: white;
-               &.add-subtask{
-                 background-color: green;
+            &:hover {
+              opacity: 1;
+              font-weight: 900;
+              transform: scale(1.2);
+              color: white;
+              &.add-subtask {
+                background-color: green;
               }
-               &.edit-task{
-                 background-color: blue;
+              &.edit-task {
+                background-color: blue;
               }
-               &.delete-task{
-                 background-color: red;
+              &.delete-task {
+                background-color: red;
               }
-    
             }
           }
         }
       }
-      .subtasks{
+      .subtasks {
         height: 0;
         transition: height 0.3s ease-in-out, padding 0.3s ease-in-out;
         overflow: hidden;
         background-color: rgb(241, 241, 241);
         border-top: 1px solid rgb(216, 216, 216);
-        .task-name{
-          font-size: 1.2rem !important;
+        font-size: 0.9rem;
+
+        .subtask-card{
+          padding-left: 10px;
+          position: relative;
+          &:not(:last-of-type){
+            &::after{
+              content: "";
+              height: 1px;
+              width: 80%;
+              bottom: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              position: absolute;
+              background-color:rgb(216, 216, 216);
+            }
+
+          }
+        }
+        .task-name {
           font-weight: 400 !important;
         }
-        &.show{
+        &.show {
           border-radius: 0 0 10px 10px;
           margin-top: 5px;
           overflow: auto;
@@ -179,57 +205,69 @@
       }
 
       transition: color 0.3s, background-color 0.3s;
-      &.selected, &:hover:not(.subtask-card){
+      &.selected,
+      &:hover:not(.subtask-card) {
         background-color: rgb(216, 216, 216);
-        button{
+        button {
           opacity: 0.7;
-          &:nth-last-child(4), &:nth-last-child(3), &:nth-last-child(2){
+          &:nth-last-child(4),
+          &:nth-last-child(3),
+          &:nth-last-child(2) {
             transform: translateX(calc(130% * 1));
           }
-          &:nth-last-child(1){
+          &:nth-last-child(1) {
+              transition: transform 0.3s, opacity 0.3s 0.3s;
+            transform: rotateZ(-90deg);
             opacity: 0;
-            transform: scale(0);
           }
         }
-        .subtask-card{
+        .subtask-card {
           transition: background-color 0.3s;
-            color: black;
-            button{
-              opacity: 0;
-              &:nth-last-child(4){
-                transform: translateX(calc(130% * 3));
-              }
-              &:nth-last-child(3){
-                transform: translateX(calc(130% * 2));
-              }
-              &:nth-last-child(2){
+          color: black;
+
+          button {
+            &:nth-last-child(4) {
+              transition: background-color 0.3s, transform 0.3s 0.2s, opacity 0.3s;
+              transform: translateX(calc(130% * 3)) scale(0);
+            }
+            &:nth-last-child(3) {
+              transition: background-color 0.3s, transform 0.3s 0.4s, opacity 0.3s;
+              transform: translateX(calc(130% * 2)) scale(0);
+            }
+            &:nth-last-child(2) {
+              transition: background-color 0.3s, transform 0.3s 0.6s, opacity 0.3s;
+              transform: translateX(calc(130% * 1)) scale(0);
+            }
+            &:nth-last-child(1) {
+              transform: scale(1); 
+              z-index: 0;
+              transition: transform 0.3s 0.6s, opacity 0.3s 0.6s;
+
+            opacity: 1;
+            }
+          }
+          &.selected,
+          &:hover {
+            background-color: rgb(231, 231, 231);
+            button {
+              opacity: 0.7;
+              &:nth-last-child(4),
+              &:nth-last-child(3),
+              &:nth-last-child(2) {
                 transform: translateX(calc(130% * 1));
               }
-              &:nth-last-child(1){
-                opacity: 1;
-                transform: scale(1);
+              &:nth-last-child(1) {
+                  transition: transform 0.3s, opacity 0.3s 0.3s;
+                transform: rotateZ(-90deg);
+                opacity: 0;
               }
             }
-            &.selected, &:hover{
-              background-color: rgb(231, 231, 231);
-              button{
-                opacity: 0.7;
-                &:nth-last-child(3), &:nth-last-child(2){
-                  transform: translateX(calc(130% * 1));
-                }
-                &:nth-last-child(1){
-                  opacity: 0;
-                  transform: scale(0);
-                }
-              }
-            }
-
+          }
+        }
+        .task-status{
+          opacity: 1;
         }
       }
-
-
-
     }
-
   }
 }
