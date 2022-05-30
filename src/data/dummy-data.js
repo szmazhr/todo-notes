@@ -144,7 +144,7 @@ const settings = {
   subtaskId: 0,
   clock:{
     enabled: true,
-    format: 'M D h:m:s',
+    format: 'MMM dd, hh:mm:ss',
     position: "top-center",
   },
   filter:{
