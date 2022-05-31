@@ -1,14 +1,9 @@
 import { loadListForm } from "../Components/list-form";
 import { createListItem } from "../Components/makeList";
 import { loadPopUp } from "../Components/pop-up";
+import { AddNew, settings } from "./data-management";
 import DOM from "./domStuff";
 import eventHandler from "./event-handler";
-
-
-
-
-
-
 
 
 //list form management
@@ -49,15 +44,14 @@ eventHandler.subscribe("list-icon-selected", (event) => {
 
 eventHandler.subscribe('list-form-submit', event => {
   const form = DOM.select('form');
-  const list = DOM.select('.all-lists ul');
   const data = {
-    id: 99,
+    id: settings.listId,
     title: form['list-name'].value || 'New List',
     color: form['list-color'].value || 'blue',
     icon: form['list-icon'].value || 'list-ul',
 
   }
-
-  list.append(createListItem(data));
+  settings.listId++;
+  AddNew.listItem(data);
   form.reset();
 })

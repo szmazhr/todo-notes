@@ -1,11 +1,5 @@
 const lists = [
   {
-    id: 0,
-    title: "All Tasks",
-    icon: "inbox",
-    color: "gray"
-  },
-  {
     id: 1,
     title: "Default",
     icon: "",
@@ -110,9 +104,9 @@ const subtasks = [
 ];
 
 const settings = {
-  listId: 0,
-  taskId: 0,
-  subtaskId: 0,
+  listId: 9,
+  taskId: 9,
+  subtaskId: 9,
   clock:{
     enabled: true,
     format: 'MMM dd, hh:mm:ss',
@@ -123,4 +117,4 @@ const settings = {
   }
 };
 
-export { lists, tasks, subtasks, settings };
+export { lists as dummyLists, tasks as dummyTasks, subtasks as dummySubtasks, settings };

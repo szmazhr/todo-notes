@@ -17,7 +17,7 @@ function addClickListener(element, eventName) {
     eventHandler.publish(eventName, event);
 
     //event logging added - to be removed
-    console.log({element, parent , id, eventName});
+    console.log({element, parent , id, eventName, event});
   });
 }
 

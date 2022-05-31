@@ -1,6 +1,9 @@
+import { add } from "date-fns";
 import { addClickListener } from "../Modules/click-handler";
 import { lists } from "../Modules/data-management";
 import DOM from "../Modules/domStuff";
+import eventHandler from "../Modules/event-handler";
+import { excerpt } from "../Modules/utils";
 
 const textAndClass = [
   {
@@ -33,13 +36,12 @@ function createListItem(item) {
   );
   li.setAttribute("data-id", `l-${item.id}`);
   DOM.bsIcon(item.icon, icon);
-  if(item.color) icon.style.color = item.color;
-  DOM.textNode(item.title, "span", title);
+  if (item.color) icon.style.color = item.color;
+  DOM.textNode(excerpt(item.title, 15), "span", title);
   DOM.textNode(0, "span", count);
   DOM.bulkAppend(li, [row, [icon], [title], [count]]);
 
-  addClickListener(li, 'view-list')
-
+  addClickListener(li, "view-list");
   return li;
 }
 
@@ -49,8 +51,8 @@ const primaryList = ((items) => {
     const li = createListItem(item);
     const title = DOM.select(".title", li);
     const title_wrapper = DOM.createElementsByClassName(["row"]);
-    const icon = DOM.select('.icon', li);
-    icon.style.removeProperty('color');
+    const icon = DOM.select(".icon", li);
+    icon.style.removeProperty("color");
     li.classList.add(item.title.toLowerCase());
     title_wrapper.appendChild(title);
     li.appendChild(title_wrapper);
@@ -65,11 +67,15 @@ function makeList(type = 1, parent) {
   if (type === 1) {
     list.append(...primaryList);
   } else if (type === 2) {
-    lists.forEach((item) => {
-      list.append(createListItem(item));
-    });
+    list.append(createListItem(lists[0]));
   }
   parent.appendChild(list);
 }
 
 export { makeList, createListItem };
+
+eventHandler.subscribe("added-list-item", (item) => {
+  const list = DOM.select(".all-lists ul");
+  list.append(createListItem(item));
+  eventHandler.publish("count");
+});

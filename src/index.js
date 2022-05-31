@@ -25,3 +25,6 @@ import './js/Modules/forms-management';
 eventHandler.publish('initialize');
 
 eventHandler.publish("view-list");
+
+
+eventHandler.publish('ready');

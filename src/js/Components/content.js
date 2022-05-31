@@ -12,5 +12,5 @@ eventHandler.subscribe('initialized', () => {
 
   DOM.bulkAppend(content, [sidebar], [home]);
 
-  eventHandler.publish('count');
+
 });

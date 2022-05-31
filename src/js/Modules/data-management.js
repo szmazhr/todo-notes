@@ -1,4 +1,10 @@
-import { lists, tasks, subtasks, settings } from "/src/data/dummy-data.js";
+import eventHandler from "./event-handler";
+import { dummyLists, dummyTasks, dummySubtasks, settings } from "/src/data/dummy-data.js";
+
+const lists = [];
+const tasks = [];
+const subtasks = [];
+
 
 class List {
   constructor(item) {
@@ -20,17 +26,6 @@ class Task {
     this.dueDate = task.dueDate || "";
   }
 }
-
-const construct = (items, constructor) => {
-  items.forEach((item, i) => {
-    items[i] = new constructor(item);
-    i++;
-  });
-};
-
-construct(tasks, Task);
-construct(subtasks, Task);
-construct(lists, List);
 
 const getSubtasks = function () {
   const taskId = this.id;
@@ -58,16 +53,53 @@ const getParent = function () {
   return parent.find((x) => x.id === +_id);
 }
 
-lists.forEach((list) => {
-  Object.assign(list, { getTasks });
+const AddNew ={
+  listItem(list) {
+    const newList = new List(list);
+    lists.push(newList);
+    Object.assign(newList, { getTasks });
+    eventHandler.publish('added-list-item', newList);
+    return newList;
+  },
+  taskItem(task) {
+    const newTask = new Task(task);
+    tasks.push(newTask);
+    Object.assign(newTask, { getSubtasks, getParent });
+    eventHandler.publish('added-task-item', newTask);
+    return newTask;
+  },
+  subtaskItem(subtask) {
+    const newSubtask = new Task(subtask);
+    subtasks.push(newSubtask);
+    Object.assign(newSubtask, { getParent });
+    eventHandler.publish('added-subtask-item', newSubtask);
+    return newSubtask;
+  }
+
+}
+
+
+const construct = (items, constructor) => {
+  items.forEach((item, i) => {
+    constructor(item);
+    i++;
+  });
+};
+
+//default list
+AddNew.listItem({
+  id: 0,
+  title: "All Tasks",
+  icon: "inbox",
+  color: "gray"
 });
 
-tasks.forEach((task) => {
-  Object.assign(task, { getSubtasks, getParent });
-});
-subtasks.forEach((subtask) => {
-  Object.assign(subtask, { getParent });
-});
+eventHandler.subscribe('ready', () => {
+  construct(dummyTasks, AddNew.taskItem);
+  construct(dummySubtasks, AddNew.subtaskItem);
+  construct(dummyLists, AddNew.listItem);
+})
 
 
-export { List, lists, tasks, subtasks, getList, getTask, settings};
+
+export { lists, tasks, subtasks, getList, getTask, settings, AddNew };

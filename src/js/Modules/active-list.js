@@ -4,7 +4,6 @@ import DOM from "./domStuff";
 import eventHandler from "./event-handler";
 
 eventHandler.subscribe("view-list", (event) => {
-
   const element = (event) ? event.currentTarget : DOM.select(".all-lists [data-id='l-0']");
   const _id = element.dataset.id;
   const parent = element.closest("ul");
@@ -42,5 +41,19 @@ eventHandler.subscribe("view-list", (event) => {
         main.append(createTask(task));
     })
     
+    if(event){
+      const x = event.offsetX;
+      const y = event.offsetY;
+  
+      element.style.clipPath = `circle(0px at ${x}px ${y}px)`;
+      
+      setTimeout(() => {
+        element.style.clipPath = `circle(100%)`;
+        setTimeout(() => {
+          element.style.removeProperty('clip-path');
+        }, 300)
+      }, 0);
+    }
   }
+  
 });
