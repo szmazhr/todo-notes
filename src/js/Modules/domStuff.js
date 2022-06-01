@@ -74,7 +74,7 @@ const DOM = {
 
   createInput(type, name, id, placeholder, parentClass, sibling, position = 'afterbegin') {
     const _element = this.createElements('input');
-    const _parent = this.createElementsByClassName([`form-control ${parentClass}`]);
+    const _parent = this.createElementsByClassName([parentClass]);
     const _label = this.createElements('label');
 
     this.addAttributes(_element, {

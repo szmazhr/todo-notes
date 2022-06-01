@@ -1,6 +1,8 @@
 import eventHandler from "./event-handler";
 import DOM from "./domStuff";
 import { lists, getList } from "./data-management";
+import { isToday, parseISO } from "date-fns";
+
 
 eventHandler.subscribe("count", () => {
   const counters = DOM.selectAll(".count");
@@ -20,6 +22,7 @@ eventHandler.subscribe("count", () => {
     let output = 0;
     switch(id){
       case 'l-scheduled': output = tasks.filter(task => !task.completed && task.dueDate).length; break;
+      case 'l-today': output = tasks.filter(task => !task.completed && task.dueDate && isToday(parseISO(task.dueDate))).length; break;
       case 'l-all':
       case 'l-0': output = tasks.filter(task => !task.completed).length; break;
     }

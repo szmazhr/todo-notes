@@ -1,0 +1,84 @@
+.task-form{
+padding: 5px;
+
+.form-control{
+  background-color: rgb(241, 241, 241);
+  padding: 10px;
+  width: 100%;
+  margin: auto 10px;
+  padding: 10px;
+  &:first-of-type{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  &:last-of-type{
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  input[name=title]{
+    font-weight: bold;
+  }
+  
+    input:not([type=radio]), textarea{
+      width: 100%;
+      resize: vertical;
+      padding: 5px;
+      padding: 10px;
+      border: none;
+      background-color: rgb(231, 231, 231);
+      font-size: 1.2rem;
+      text-align: center;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      outline: none;
+      &:hover{
+        box-shadow: 0 0 4px black;
+      }
+      &:focus{
+        background-color: rgb(211, 211, 211);
+      }
+    }
+    
+    textarea{
+      overflow: auto;
+    }
+    legend{
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding-bottom: 0.2rem;
+
+    }
+
+    
+    input[type=radio]{
+      width: auto;
+      height: auto;
+      padding: 0;
+      margin: 0;
+      border: none;
+      background-color: transparent;
+      padding: 5px;
+      cursor: pointer;
+
+      ~ label{
+        padding: 5px;
+      font-weight: bold;
+      color: rgb(48, 48, 48);
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+  }
+  .radio{
+    line-height: 1.3rem;
+  }
+  #task-priority-high{
+    accent-color: red;
+  }
+  #task-priority-normal{
+    accent-color: yellow;
+  }
+  #task-priority-low{
+      accent-color: green;
+    }
+}
+
+}

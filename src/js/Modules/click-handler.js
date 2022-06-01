@@ -10,14 +10,8 @@ import eventHandler from "/src/js/Modules/event-handler";
 
 function addClickListener(element, eventName) {
   element.addEventListener("click", (event) => {
-    const parent = element.closest("[data-id]");
-    const id = parent.dataset.id;
-
-    //id is required to be passed to eventHandler
     eventHandler.publish(eventName, event);
 
-    //event logging added - to be removed
-    console.log({element, parent , id, eventName, event});
   });
 }
 

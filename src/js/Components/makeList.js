@@ -34,6 +34,7 @@ function createListItem(item) {
     ["count"],
     ["title"]
   );
+
   li.setAttribute("data-id", `l-${item.id}`);
   DOM.bsIcon(item.icon, icon);
   if (item.color) icon.style.color = item.color;
@@ -47,7 +48,7 @@ function createListItem(item) {
 
 const primaryList = ((items) => {
   const _list = [];
-  items.forEach((item) => {
+  items.forEach((item, i) => {
     const li = createListItem(item);
     const title = DOM.select(".title", li);
     const title_wrapper = DOM.createElementsByClassName(["row"]);
@@ -56,6 +57,7 @@ const primaryList = ((items) => {
     li.classList.add(item.title.toLowerCase());
     title_wrapper.appendChild(title);
     li.appendChild(title_wrapper);
+    if(i === 0){ li.classList.add("selected"); }
     _list.push(li);
   });
   return _list;
@@ -71,11 +73,10 @@ function makeList(type = 1, parent) {
   }
   parent.appendChild(list);
 }
-
-export { makeList, createListItem };
-
 eventHandler.subscribe("added-list-item", (item) => {
   const list = DOM.select(".all-lists ul");
   list.append(createListItem(item));
-  eventHandler.publish("count");
 });
+
+export { makeList };
+

@@ -1,8 +1,5 @@
 import DOM from "../Modules/domStuff";
 import { createMainHeader } from "./main-header";
-import { createTask } from "./task-card";
-import { tasks } from "../../data/dummy-data";
-
 
 
 function createHome() {

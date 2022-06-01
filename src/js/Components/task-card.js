@@ -1,5 +1,9 @@
+// const fns = require("date-fns");
+import { format, parseISO } from "date-fns";
 import { addClickListener } from "../Modules/click-handler";
+import { menuOptions } from "../Modules/data-management";
 import DOM from "../Modules/domStuff";
+import eventHandler from "../Modules/event-handler";
 import { excerpt } from "../Modules/utils";
 import { createIconButton } from "./icon-button";
 
@@ -70,6 +74,10 @@ function createTask(task) {
   //status completed/incomplete
   checkbox.checked = task.completed;
 
+  checkbox.addEventListener("change", (event) => {
+    eventHandler.publish('task-status-change', task);
+  })
+
   //adding title under the span element
   DOM.textNode(task.title, `${!_isSubtask ? "h3" : "h4"}`, task_name);
 
@@ -89,15 +97,11 @@ function createTask(task) {
 
   if (task.dueDate) {
     //if task had dueDate add it
-    DOM.textNode(task.dueDate, "span", task_side_note);
-
-    if (!_isSubtask) {
-      //dot after that for main task
-      DOM.bsIcon("dot", task_side_note);
-    }
+    DOM.textNode(format(parseISO(task.dueDate), 'dd/MM/yyyy hh:mm'), "span", task_side_note);
   }
-
-  if (!_isSubtask) {
+  
+  if (!_isSubtask && menuOptions.isSubtaskEnabled) {
+    DOM.bsIcon("dot", task_side_note);
     // if task is main task, add link to toggle subtask
     //subtasks counter
     const _count = task.getSubtasks().length;
@@ -107,6 +111,8 @@ function createTask(task) {
     _a.setAttribute("href", `#subtasks`);
     if (_count > 0) addClickListener(_a, "subtask-list");
   }
+  const priority = DOM.createElementsByClassName([`task-priority priority-${task.priority}`]);
+  task_card.appendChild(priority);
 
   buttons.forEach((btn) => {
     if (_isSubtask && btn.name == "add-subtask") return;
@@ -127,4 +133,9 @@ function createTask(task) {
   return task_card;
 }
 
-export { createTask };
+eventHandler.subscribe('render-task', task => {
+  const main = DOM.select(".body .main-content");
+  main.append(createTask(task));
+})
+
+// export { createTask };

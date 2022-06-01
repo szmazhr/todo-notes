@@ -21,14 +21,20 @@ const loadListForm = (() => {
 
   DOM.bsIcon('list-ul', iconWrapper);
 
-  const nameField = DOM.createInput('text', 'list-name', 'list-name', 'List Name', 'name-field', iconWrapper);
-  const colorField = DOM.createInput('hidden', 'list-color', 'list-color', 'List Color', 'color-gallery');
-  const iconField = DOM.createInput('hidden', 'list-icon', 'list-icon', 'List Icon', 'icon-gallery');
+  const nameField = DOM.createInput('text', 'list-name', 'list-name', 'List Name', 'form-control name-field', iconWrapper);
+  const colorField = DOM.createInput('hidden', 'list-color', 'list-color', 'List Color', 'form-control  color-gallery');
+  const iconField = DOM.createInput('hidden', 'list-icon', 'list-icon', 'List Icon', 'form-control  icon-gallery');
+  const id = DOM.createElements('input');
+  DOM.addAttributes(id, {
+    type: 'hidden',
+    name: 'list-id',
+    value: '',
+  })
   
 
   primaryColors.forEach((color, i) => {
     const divBtn = DOM.createElementsByClassName(
-      [`color-display ${(i === 0) ? 'selected' : ''}`],
+      [`color-display`],
     )
     divBtn.style.backgroundColor = color;
     divBtn.setAttribute('data-color', color);
@@ -38,7 +44,7 @@ const loadListForm = (() => {
   })
   Icons.forEach((icon, i) => {
     const divBtn = DOM.createElementsByClassName(
-      [`icon-display ${(i === 0) ? 'selected' : ''}`],
+      [`icon-display`],
     )
     DOM.bsIcon(icon, divBtn);
     divBtn.setAttribute('data-icon', icon);
@@ -51,7 +57,7 @@ const loadListForm = (() => {
   btn.textContent = 'Delete List';
   btnWrapper.appendChild(btn);
 
-  DOM.bulkAppend(form, [nameField], [colorField], [iconField]);
+  DOM.bulkAppend(form, [id], [nameField], [colorField], [iconField]);
 
 
   form.addEventListener('submit', (event) => {

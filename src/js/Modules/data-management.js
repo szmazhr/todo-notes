@@ -1,5 +1,11 @@
 import eventHandler from "./event-handler";
-import { dummyLists, dummyTasks, dummySubtasks, settings } from "/src/data/dummy-data.js";
+import { getData, storeData } from "./localStorageManager";
+import { dummyLists, dummyTasks, dummySubtasks, settings, menuOptions } from "/src/data/dummy-data.js";
+
+const importedLists = getData('lists') || dummyLists;
+const importedTasks = getData('tasks') || dummyTasks;
+const importedSettings = getData('settings') || settings;
+
 
 const lists = [];
 const tasks = [];
@@ -8,18 +14,18 @@ const subtasks = [];
 
 class List {
   constructor(item) {
-    this.id = item.id;
+    this.id = (item.id === 0) ? 0 : item.id || settings.listId++;
     this.title = item.title;
     this.icon = item.icon || 'list-ul';
-    this.color = item.color;
+    this.color = item.color || 'blue';
   }
 }
 
 class Task {
   constructor(task) {
-    this.id = task.id;
+    this.id = (task.id === 0) ? 0 : task.id || settings.taskId++;
     this.title = task.title;
-    this.parentId = task.parentId || "l-1";
+    this.parentId = task.parentId;
     this.completed = task.completed ? true : false;
     this.priority = task.priority || 0;
     this.description = task.description;
@@ -38,7 +44,8 @@ const getTasks = function () {
 };
 
 const getList = function (id) {
-  return lists.find((list) => list.id === +id);
+  const _id = id.toString().match(/^([l]-)[0-9]+$/i) ? id.split("-")[1] : id;
+  return lists.find((list) => list.id === +_id);
 };
 
 const getTask = function (id) {
@@ -56,9 +63,14 @@ const getParent = function () {
 const AddNew ={
   listItem(list) {
     const newList = new List(list);
+    if(lists.find((x) => x.id === newList.id)) return;
     lists.push(newList);
     Object.assign(newList, { getTasks });
     eventHandler.publish('added-list-item', newList);
+    eventHandler.publish('refresh-list'); //required because All task list fetches all from available lists
+    eventHandler.publish('count');
+    storeData('lists', lists);
+    storeData('settings', settings);
     return newList;
   },
   taskItem(task) {
@@ -66,6 +78,10 @@ const AddNew ={
     tasks.push(newTask);
     Object.assign(newTask, { getSubtasks, getParent });
     eventHandler.publish('added-task-item', newTask);
+    eventHandler.publish('refresh-list');
+    eventHandler.publish('count');
+    storeData('tasks', tasks);
+    storeData('settings', settings);
     return newTask;
   },
   subtaskItem(subtask) {
@@ -86,6 +102,7 @@ const construct = (items, constructor) => {
   });
 };
 
+
 //default list
 AddNew.listItem({
   id: 0,
@@ -95,11 +112,11 @@ AddNew.listItem({
 });
 
 eventHandler.subscribe('ready', () => {
-  construct(dummyTasks, AddNew.taskItem);
-  construct(dummySubtasks, AddNew.subtaskItem);
-  construct(dummyLists, AddNew.listItem);
+  construct(importedLists, AddNew.listItem);
+  construct(importedTasks, AddNew.taskItem);
+  if(settings.isSubtaskEnabled) {
+    construct(dummySubtasks, AddNew.subtaskItem);
+  }
 })
 
-
-
-export { lists, tasks, subtasks, getList, getTask, settings, AddNew };
+export { lists, tasks, subtasks, getList, getTask, importedSettings as settings, AddNew, menuOptions };

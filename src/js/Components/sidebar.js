@@ -14,7 +14,7 @@ function createSidebar() {
       ["header"]
     );
 
-    const addListBtn = createIconButton("plus-lg", "add-list");
+    const addListBtn = createIconButton("three-dots-vertical", "list-menu");
     DOM.textNode("My Lists", "h3", header);
 
 
@@ -24,6 +24,8 @@ function createSidebar() {
     
     makeList(1, filtered_lists);
     makeList(2, all_lists);
+    // const pop = DOM.select('.dropdown-menu');
+    // header.append(pop)
   return sidebar;
 }
 

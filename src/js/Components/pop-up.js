@@ -21,8 +21,9 @@ const loadPopUp = (() => {
     
     DOM.bulkAppend(container, [content, [header, [_title], [quick_btn, [cnlBtn], [svBtn]]], [body]]);
     const append = (child, title) => {
-      titlePlace.textContent = "Add New " + title;
+      titlePlace.textContent = title;
       const app = DOM.select(".app");
+      // body.innerHTML = '';
       body.appendChild(child);
       app.appendChild(container);
     };
@@ -51,13 +52,24 @@ eventHandler.subscribe('close-pop-up', event => {
 })
 
 eventHandler.subscribe('save-button', event => {
+  const element = event.target;
+  const parent = element.closest('.pop-up');
+  const form = DOM.select('form', parent);
+  if(form.classList.contains('list-form')){
+  console.log(data);
   eventHandler.publish('list-form-submit', event)
-  eventHandler.publish('close-pop-up');
+}else if(form.classList.contains('task-form')){
+  eventHandler.publish('task-form-submit', event)
+}
+eventHandler.publish('close-pop-up');
 });
 
 eventHandler.subscribe('cancel-button', event => {
   const form = DOM.select('form');
-  form.reset();
+  setTimeout(() => {
+    form.reset();
+    form.remove();
+  }, 300)
   eventHandler.publish('close-pop-up');
 });
 

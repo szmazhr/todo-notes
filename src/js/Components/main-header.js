@@ -1,18 +1,18 @@
-import { settings } from "../Modules/data-management";
+import { menuOptions } from "../Modules/data-management";
 import DOM from "../Modules/domStuff";
 import { createIconButton } from "./icon-button";
 
 const buttons = [
   {
     id: 1,
-    name: "add-new",
+    name: "add-task",
     icon: "plus-lg",
   },
-  {
-    id: 2,
-    name: "view-calender",
-    icon: "calendar3",
-  },
+  // {
+  //   id: 2,
+  //   name: "view-calender",
+  //   icon: "calendar3",
+  // },
   {
     id: 3,
     name: "view-sort",
@@ -22,11 +22,6 @@ const buttons = [
     id: 4,
     name: "view-filter",
     icon: "funnel",
-  },
-  {
-    id: 5,
-    name: "delete-list",
-    icon: "trash",
   },
 ];
 
@@ -39,12 +34,11 @@ function createMainHeader() {
   DOM.textNode("{Title}", "h2", title);
   buttons.forEach((btn) => {
     const _btn = createIconButton(btn.icon, btn.name, btn.name);
-    _btn.setAttribute("data-id", `btn-${btn.name}`);
-    if (btn.name === "delete-list") {
-      if (!settings.temp) {
-        settings.temp = {};
+    if (btn.name === "add-task") {
+      if (!menuOptions.temp) {
+        menuOptions.temp = {};
       }
-      settings.temp.dltBtn = { element: _btn, parent: quick_actions };
+      menuOptions.temp.addBtn = { element: _btn, parent: quick_actions };
       return;
     }
     quick_actions.append(_btn);

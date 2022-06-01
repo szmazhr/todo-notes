@@ -1,6 +1,7 @@
 import eventHandler from "../Modules/event-handler";
 import DOM from "../Modules/domStuff";
 import { createStatusBar } from "./status-bar";
+import { addClickListener } from "../Modules/click-handler";
 
 
 
@@ -20,7 +21,7 @@ eventHandler.subscribe('initialize', () => {
   
   
   //temp
-  
+  addClickListener(app, 'click-anywhere');
   eventHandler.publish('initialized');
 
 })
