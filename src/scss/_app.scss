@@ -1,11 +1,16 @@
 .app{
   width: 100%;
-  transform: translateY(5%);
   max-width: 1080px;
   background-color: white;
-  height: 700px;
-  max-height: 100vh;
   position: relative;
+  height: calc(100vh - 40px);
+  max-height: calc(100vh - 40px);
+  @include for_breakpoint(xl) {
+    transform: translateY(5%);
+  }
+  @include for_breakpoint(lg) {
+    height: 700px;
+  }
   .app-header{
     height: 20px;
     width: 100%;

@@ -68,12 +68,12 @@ eventHandler.subscribe("refresh-list", (id) => {
     lists.forEach((list) => {
       _t.push(...list.getTasks());
     });
-    const addBtn = DOM.select(".quick-actions .add-task");
-    if (addBtn) addBtn.remove();
+    // const addBtn = DOM.select(".quick-actions .add-task");
+    // if (addBtn) addBtn.remove();
   } else {
     _t.push(...list.getTasks());
-    const addBtn = menuOptions.temp.addBtn;
-    addBtn.parent.insertAdjacentElement("afterbegin", addBtn.element);
+    // const addBtn = menuOptions.temp.addBtn;
+    // addBtn.parent.insertAdjacentElement("afterbegin", addBtn.element);
   }
 
   const sorted = sortAndFilterTasks(_t);

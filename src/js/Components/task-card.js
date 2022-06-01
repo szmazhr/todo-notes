@@ -8,11 +8,11 @@ import { excerpt } from "../Modules/utils";
 import { createIconButton } from "./icon-button";
 
 const buttons = [
-  {
-    id: 1,
-    name: "add-subtask",
-    icon: "plus-lg",
-  },
+  // {
+  //   id: 1,
+  //   name: "add-subtask",
+  //   icon: "plus-lg",
+  // },
   {
     id: 2,
     name: "edit-task",

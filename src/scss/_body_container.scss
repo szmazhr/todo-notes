@@ -10,11 +10,33 @@
     top:5%;
     left: 10%;
     z-index: -98;
+    
+    @include for_breakpoint(lg) {
+      left: 5%;
+      top:0;
+    }
+
     h1{
       font-size: 5rem;
       color: #000000;
       opacity: 1;
       text-shadow: 8px 8px 7px #ff9797;
+      @include for_breakpoint(md) {
+      }
+      @include for_breakpoint(lg) {
+        display: none;
+      }
+      @include for_breakpoint(xl) {
+        font-size: calc(1rem + 5vh);
+        display: initial;
+      }
+      
+      @include for_breakpoint(xxl) {
+        font-size: calc(3rem + 2vh);
+      }
+      &:hover{
+        z-index: 3;
+      }
     }
   }
 }

@@ -34,13 +34,13 @@ function createMainHeader() {
   DOM.textNode("{Title}", "h2", title);
   buttons.forEach((btn) => {
     const _btn = createIconButton(btn.icon, btn.name, btn.name);
-    if (btn.name === "add-task") {
-      if (!menuOptions.temp) {
-        menuOptions.temp = {};
-      }
-      menuOptions.temp.addBtn = { element: _btn, parent: quick_actions };
-      return;
-    }
+    // if (btn.name === "add-task") {
+    //   if (!menuOptions.temp) {
+    //     menuOptions.temp = {};
+    //   }
+    //   menuOptions.temp.addBtn = { element: _btn, parent: quick_actions };
+    //   return;
+    // }
     quick_actions.append(_btn);
   });
   DOM.bulkAppend(row, [title], [quick_actions]);
