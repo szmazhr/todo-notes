@@ -62,7 +62,7 @@ eventHandler.subscribe("add-task", (e) => {
 });
 
 
-eventHandler.subscribe('task-form-submit', event => {
+eventHandler.subscribe('task-form-submit', () => {
   const form = DOM.select('form');
   const parentId =  form.dataset.id;
   const id = form['task-id'].value;

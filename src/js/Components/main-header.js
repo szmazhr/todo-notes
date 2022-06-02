@@ -1,4 +1,3 @@
-import { menuOptions } from "../Modules/data-management";
 import DOM from "../Modules/domStuff";
 import { createIconButton } from "./icon-button";
 

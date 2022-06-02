@@ -1,4 +1,4 @@
-// import { createTask } from "../Components/task-card";
+import { createTask } from "../Components/task-card";
 import { getTask } from "./data-management";
 import DOM from "./domStuff";
 import eventHandler from "./event-handler";
@@ -25,7 +25,7 @@ eventHandler.subscribe("subtask-list", event => {
         _subtasks.classList.add("show");
       }, 0);
     }
-  };
+  }
     //collapse all subtask
     if(subtasksAll){
       subtasksAll.forEach(s => {
@@ -34,5 +34,5 @@ eventHandler.subscribe("subtask-list", event => {
           s.remove();
         }, 300);
       });
-    };
+    }
 })

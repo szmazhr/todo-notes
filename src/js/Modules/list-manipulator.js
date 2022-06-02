@@ -1,5 +1,4 @@
 import { loadListForm } from "../Components/list-form";
-import { createListItem } from "../Components/makeList";
 import { loadPopUp } from "../Components/pop-up";
 import { AddNew, getList, lists } from "./data-management";
 import DOM from "./domStuff";
@@ -86,7 +85,7 @@ eventHandler.subscribe("list-icon-selected", (event) => {
 })
 
 
-eventHandler.subscribe('list-form-submit', event => {
+eventHandler.subscribe('list-form-submit', () => {
   const form = DOM.select('form');
   const data = {
     id: parseInt(form['list-id'].value.replace(/^(l-)/, "")) || "",

@@ -2,51 +2,51 @@ import { menuOptions } from "./data-management";
 import eventHandler from "./event-handler";
 import { isToday, parseISO } from "date-fns";
 
-eventHandler.subscribe("filter-priority-1", e => {
+eventHandler.subscribe("filter-priority-1", () => {
   const option = {priority: 1};
   eventHandler.publish("filter-tasks", option)
 })
-eventHandler.subscribe("filter-priority-2", e => {
+eventHandler.subscribe("filter-priority-2", () => {
   const option = {priority: 2};
   eventHandler.publish("filter-tasks", option)
 })
-eventHandler.subscribe("filter-priority-3", e => {
+eventHandler.subscribe("filter-priority-3", () => {
   const option = {priority: 3};
   eventHandler.publish("filter-tasks", option)
 })
-eventHandler.subscribe("filter-priority-none", e => {
+eventHandler.subscribe("filter-priority-none", () => {
   const option = {priority: 0};
   eventHandler.publish("filter-tasks", option)
 })
-eventHandler.subscribe("filter-priority-reset", e => {
+eventHandler.subscribe("filter-priority-reset", () => {
   const option = {priority: 'all'};
   eventHandler.publish("filter-tasks", option)
 })
-eventHandler.subscribe("filter-completed", e => {
+eventHandler.subscribe("filter-completed", () => {
   const option = {status: true};
   eventHandler.publish("filter-tasks", option)
 })
-eventHandler.subscribe("filter-incomplete", e => {
+eventHandler.subscribe("filter-incomplete", () => {
   const option = {status: false};
   eventHandler.publish("filter-tasks", option)
 })
-eventHandler.subscribe("filter-status-reset", e => {
+eventHandler.subscribe("filter-status-reset", () => {
   const option = {status: 'all'};
   eventHandler.publish("filter-tasks", option)
 })
-eventHandler.subscribe("sort-by-due-dateAsc", e => {
+eventHandler.subscribe("sort-by-due-dateAsc", () => {
   const option = {by: 'dueDate', direction: 'asc'};
   eventHandler.publish("sort-tasks", option)
 })
-eventHandler.subscribe("sort-by-due-dateDesc", e => {
+eventHandler.subscribe("sort-by-due-dateDesc", () => {
   const option = {by: 'dueDate', direction: 'desc'};
   eventHandler.publish("sort-tasks", option)
 })
-eventHandler.subscribe("sort-by-priorityL-H", e => {
+eventHandler.subscribe("sort-by-priorityL-H", () => {
   const option = {by: 'priority', direction: 'asc'};
   eventHandler.publish("sort-tasks", option)
 })
-eventHandler.subscribe("sort-by-priorityH-L", e => {
+eventHandler.subscribe("sort-by-priorityH-L", () => {
   const option = {by: 'priority', direction: 'desc'};
   eventHandler.publish("sort-tasks", option)
 })

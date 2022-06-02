@@ -1,4 +1,3 @@
-import { addClickListener } from "../Modules/click-handler";
 import DOM from "../Modules/domStuff";
 import eventHandler from "../Modules/event-handler";
 import { createIconButton } from "./icon-button";
@@ -41,7 +40,7 @@ eventHandler.subscribe('open-pop-up', () =>{
   }, 0)
 })
 
-eventHandler.subscribe('close-pop-up', event => {
+eventHandler.subscribe('close-pop-up', () => {
   const popUp = DOM.select('.pop-up');
   popUp.classList.remove('showed');
   popUp.classList.add('show');
@@ -56,7 +55,6 @@ eventHandler.subscribe('save-button', event => {
   const parent = element.closest('.pop-up');
   const form = DOM.select('form', parent);
   if(form.classList.contains('list-form')){
-  console.log(data);
   eventHandler.publish('list-form-submit', event)
 }else if(form.classList.contains('task-form')){
   eventHandler.publish('task-form-submit', event)
@@ -64,7 +62,7 @@ eventHandler.subscribe('save-button', event => {
 eventHandler.publish('close-pop-up');
 });
 
-eventHandler.subscribe('cancel-button', event => {
+eventHandler.subscribe('cancel-button', () => {
   const form = DOM.select('form');
   setTimeout(() => {
     form.reset();

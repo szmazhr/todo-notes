@@ -1,6 +1,5 @@
 import { addClickListener } from "../Modules/click-handler";
 import DOM from "../Modules/domStuff";
-import eventHandler from "../Modules/event-handler";
 
 const primaryColors = ['blue', 'orange', 'yellow', 'green', 'red', 'purple'];
 const Icons = ['list-ul', 'cart4','bank', 'book', 'controller','dribbble', 'envelope-paper' ]
@@ -32,7 +31,7 @@ const loadListForm = (() => {
   })
   
 
-  primaryColors.forEach((color, i) => {
+  primaryColors.forEach((color) => {
     const divBtn = DOM.createElementsByClassName(
       [`color-display`],
     )
@@ -42,7 +41,7 @@ const loadListForm = (() => {
     addClickListener(divBtn, 'list-color-selected');
     divBtn.setAttribute('data-id', color);
   })
-  Icons.forEach((icon, i) => {
+  Icons.forEach((icon) => {
     const divBtn = DOM.createElementsByClassName(
       [`icon-display`],
     )

@@ -1,7 +1,7 @@
+import { addSeconds, format } from "date-fns";
 import { settings } from "../Modules/data-management";
 import DOM from "../Modules/domStuff";
 import eventHandler from "../Modules/event-handler";
-const fns = require("date-fns");
 
 eventHandler.subscribe("initialized", () => {
   if(settings.clock.enabled){
@@ -14,12 +14,10 @@ eventHandler.subscribe("initialized", () => {
         const clockEl = DOM.textNode("{clock}", "span", position);
         let clock = new Date();
         setInterval(() => {
-          clock = fns.addSeconds(clock, 1)
-          clockEl.textContent = fns.format(clock, settings.clock.format);
+          clock = addSeconds(clock, 1)
+          clockEl.textContent = format(clock, settings.clock.format);
         }, 1000);
 
-  }else{
-    
   }
 });
 

@@ -96,9 +96,8 @@ const AddNew ={
 
 
 const construct = (items, constructor) => {
-  items.forEach((item, i) => {
+  items.forEach((item) => {
     constructor(item);
-    i++;
   });
 };
 

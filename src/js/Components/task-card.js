@@ -7,6 +7,7 @@ import eventHandler from "../Modules/event-handler";
 import { excerpt } from "../Modules/utils";
 import { createIconButton } from "./icon-button";
 
+
 const buttons = [
   // {
   //   id: 1,
@@ -74,7 +75,7 @@ function createTask(task) {
   //status completed/incomplete
   checkbox.checked = task.completed;
 
-  checkbox.addEventListener("change", (event) => {
+  checkbox.addEventListener("change", () => {
     eventHandler.publish('task-status-change', task);
   })
 
@@ -138,4 +139,4 @@ eventHandler.subscribe('render-task', task => {
   main.append(createTask(task));
 })
 
-// export { createTask };
+export { createTask };

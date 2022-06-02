@@ -1,4 +1,3 @@
-import { createTask } from "../Components/task-card";
 import { lists, menuOptions } from "./data-management";
 import DOM from "./domStuff";
 import eventHandler from "./event-handler";
