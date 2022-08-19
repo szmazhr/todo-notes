@@ -5,7 +5,7 @@
  * To add a click listener on newly added element, use: addClickListener(element);
  */
 
-import DOM from "./domStuff";
+
 import eventHandler from "/src/js/Modules/event-handler";
 
 function addClickListener(element, eventName) {
@@ -14,13 +14,6 @@ function addClickListener(element, eventName) {
 
   });
 }
-
-
-eventHandler.subscribe("delete-list", () => {
-  const selectedList = DOM.select(".all-lists .selected");
-  const selectedListId = selectedList.dataset.id;
-  console.log(selectedListId);
-})
 
 
 export { addClickListener };
