@@ -83,7 +83,6 @@ eventHandler.subscribe('task-form-submit', () => {
     tasks.splice(i, 1);
     taskCard.remove();
   }
-  console.log(data)
   AddNew.taskItem(data);
   form.reset();
 })
